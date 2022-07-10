@@ -1,55 +1,92 @@
-import {withStyles, AppBar, Toolbar, Typography, IconButton, Container} from '@material-ui/core'
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import Link from 'next/link'
-import Interstitial from '../Interstitial'
-import {useContext, useState} from "react";
-import GlobalContext from "../../state/global-context";
+import {
+  withStyles,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Container,
+} from "@material-ui/core";
+import Link from "next/link";
+import Interstitial from "../Interstitial";
+import WishListPanel from "../WishListPanel";
 
-const useStyles = theme => ({
-    toolbar: {
-        padding: 0,
-        display: "flex",
-        justifyContent: "space-between",
-    },
-    cartIcon: {
-        color: theme.palette.light,
-    }
+import {
+  TOGGLE_CARD,
+  TOGGLE_WISHLIST,
+  useGlobalContext,
+} from "./../../state/global-context-v2";
+import { ShoppingBagIcon, HeartIcon } from "@heroicons/react/outline";
+import clsx from "clsx";
+
+const useStyles = (theme) => ({
+  toolbar: {
+    padding: 0,
+    display: "flex",
+    justifyContent: "space-between",
+  },
 });
 
-const Header = props => {
-    const {classes} = props
-    const context = useContext(GlobalContext);
+const Header = (props) => {
+  const { classes } = props;
+  const { infos, dispatch } = useGlobalContext();
 
-    const toggleDrawer = (open) => (event) => {
-        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        context.pushObject('open_interstitial', true);
-    };
+  const toggleCard = (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    dispatch({ type: TOGGLE_CARD, payload: !infos?.isCardOpen });
+  };
 
-    return (
-        <>
-        <header className={classes.root}>
-            <AppBar position="static" elevation={0}>
-                <Container maxWidth="lg">
-                    <Toolbar className={classes.toolbar}>
-                        <Link href="/" passHref>
-                            <a>
-                                <Typography variant="h4" className={classes.title}>
-                                    SuperShop
-                                </Typography>
-                            </a>
-                        </Link>
-                        <IconButton onClick={toggleDrawer(!context.open_interstitial)}>
-                            <ShoppingBasketIcon className={classes.cartIcon}/>
-                        </IconButton>
-                    </Toolbar>
-                </Container>
-            </AppBar>
-        </header>
-        <Interstitial/>
-            </>
-    )
-}
+  const toggleWishList = (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    dispatch({ type: TOGGLE_WISHLIST, payload: !infos?.isWishlistOpen });
+  };
 
-export default withStyles(useStyles)(Header)
+  return (
+    <>
+      <header className={classes.root}>
+        <AppBar className="!bg-indigo-600 py-4" position="static" elevation={0}>
+          <Container maxWidth="lg">
+            <Toolbar className={classes.toolbar}>
+              <Link href="/" passHref>
+                <a>
+                  <Typography
+                    variant="h4"
+                    className={clsx("font-bold", classes.title)}
+                  >
+                    SuperShop
+                  </Typography>
+                </a>
+              </Link>
+              <div>
+                <IconButton onClick={toggleWishList}>
+                  <HeartIcon className="h-6 w-6 text-white" />
+                </IconButton>
+                <IconButton onClick={toggleCard} className="relative">
+                  <ShoppingBagIcon className="h-6 w-6 text-white" />
+                  <span className="absolute bottom-2.5 right-2.5 flex items-center justify-center w-3 h-3 bg-white rounded-full">
+                    <span className="text-[8px]">{infos?.card?.length}</span>
+                  </span>
+                </IconButton>
+              </div>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </header>
+      <Interstitial />
+      <WishListPanel />
+    </>
+  );
+};
+
+export default withStyles(useStyles)(Header);
