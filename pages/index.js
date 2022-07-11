@@ -46,10 +46,10 @@ const Home = (props) => {
           <Image
             className="absolute inset-0 w-full h-full object-cover"
             src="/static/images/beauty.png"
-            width="500"
-            height="500"
             layout="fill"
+            objectFit="cover"
             alt="Beauty products"
+            priority
           />
         </span>
       </div>

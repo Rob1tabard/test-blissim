@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import { GlobalProvider } from "../state/global-context";
 import { GlobalProvider as GlobalProviderV2 } from "../state/global-context-v2";
 import { ThemeProvider } from "@material-ui/styles";
 import { CssBaseline } from "@material-ui/core";
@@ -9,11 +8,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <GlobalProvider>
-        <GlobalProviderV2>
-          <Component {...pageProps} />
-        </GlobalProviderV2>
-      </GlobalProvider>
+      <GlobalProviderV2>
+        <Component {...pageProps} />
+      </GlobalProviderV2>
     </ThemeProvider>
   );
 }

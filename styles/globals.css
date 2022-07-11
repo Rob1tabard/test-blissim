@@ -2,19 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+.card-image {
+  @apply hidden md:block relative min-w-[200px] max-w-[400px] w-full min-h-[300px] h-full;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.card-wrapper {
+  @apply relative rounded overflow-hidden bg-white max-w-5xl min-h-[400px] w-full flex flex-col md:flex-row;
 }
 
-* {
-  box-sizing: border-box;
+.page {
+  @apply w-screen h-screen flex flex-col p-8 space-y-4;
+}
+
+.card-title {
+  @apply text-2xl font-bold;
+}
+
+.wrapper {
+  @apply p-5 flex flex-col justify-center space-y-5;
+}
+
+.content-wrapper {
+  @apply relative flex items-center space-x-3;
+}
+
+.heart {
+  @apply min-w-max h-12 w-12 text-yellow-500;
+}
+
+.text-container {
+  @apply flex flex-col space-y-1;
+}
+
+.text-header {
+  @apply text-2xl font-extrabold;
 }

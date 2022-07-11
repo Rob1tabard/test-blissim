@@ -55,9 +55,9 @@ const Category = () => {
         maxWidth="lg"
         className="flex flex-col justify-between items-start h-full"
       >
-        <Grid container justifyContent={"center"}>
+        <Grid container justifyContent={"center"} className="py-6">
           <Grid item>
-            <Typography variant="h3" component="h1">
+            <Typography variant="h3" component="h1" className="capitalize">
               {category}
             </Typography>
           </Grid>
@@ -67,7 +67,7 @@ const Category = () => {
           <Grid item xs={12} md={3}>
             <Typography variant="h6">Catégories</Typography>
             <div>
-              <ul>
+              <ul className="flex flex-col space-y-3 mt-2 w-2/3">
                 <CategoriesList active={category} />
               </ul>
             </div>

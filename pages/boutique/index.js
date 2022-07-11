@@ -226,7 +226,7 @@ const Boutique = (props) => {
               Catégories
             </Typography>
             <div>
-              <ul className="flex flex-col space-y-3">
+              <ul className="flex flex-col space-y-3 mt-2 w-2/3">
                 <CategoriesList />
               </ul>
             </div>

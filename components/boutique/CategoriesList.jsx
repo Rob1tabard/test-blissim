@@ -8,9 +8,9 @@ const BASE_URL = "/boutique/";
 export const CategoriesList = ({ active = null }) => {
   const { categories, isLoading } = useCategories();
 
-  if (true) {
-    return [...Array(5).keys()]?.map((el, id) => (
-      <li key={id} className="w-20 h-3 rounded bg-slate-500 animate-pulse" />
+  if (isLoading) {
+    return [...Array(5).keys()]?.map((el) => (
+      <li key={el} className="w-20 h-5 rounded bg-gray-300 animate-pulse" />
     ));
   }
 
@@ -19,7 +19,11 @@ export const CategoriesList = ({ active = null }) => {
       {categories?.map((el, id) => (
         <li key={id}>
           <Link href={BASE_URL + el}>
-            <a className={clsx({ "underline font-extrabold": active === el })}>
+            <a
+              className={clsx("capitalize", {
+                "font-extrabold": active === el,
+              })}
+            >
               {el}
             </a>
           </Link>

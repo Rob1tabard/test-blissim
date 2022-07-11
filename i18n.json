@@ -1,0 +1,8 @@
+{
+  "locales": ["fr"],
+  "defaultLocale": "fr",
+  "pages": {
+    "*": ["blissim"],
+    "blissim-component": ["blissim"]
+  }
+}
