@@ -50,7 +50,7 @@ const data = [
 ];
 
 // Got an issue with tailwindcss and I think materialUI. Impossible to compute styles.
-// I was trying to show
+// I had to declare classes in order for the style to compute
 const BlissimComponentPage = () => {
   return (
     <div className="page">
